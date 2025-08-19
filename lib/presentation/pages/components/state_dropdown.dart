@@ -1,11 +1,19 @@
 import 'package:country_selector/presentation/bloc/country_cubit.dart';
 import 'package:country_selector/presentation/bloc/country_state.dart';
 import 'package:country_selector/presentation/pages/components/loading_dropdown.dart';
+import 'package:country_selector/presentation/pages/components/shake_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class StateDropdown extends StatelessWidget {
+class StateDropdown extends StatefulWidget {
   const StateDropdown({super.key});
+
+  @override
+  State<StateDropdown> createState() => _StateDropdownState();
+}
+
+class _StateDropdownState extends State<StateDropdown> {
+  bool _shake = false;
 
   @override
   Widget build(BuildContext context) {
@@ -17,22 +25,40 @@ class StateDropdown extends StatelessWidget {
           previous.isLoadingStates != current.isLoadingStates ||
           previous.statesError != current.statesError,
       builder: (context, state) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (!state.hasSelectedCountry) ...[
-              DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                  labelText: 'State',
-                  border: const OutlineInputBorder(),
+        return ShakeWrapper(
+          shouldShake: _shake,
+          onShakeDone: () {
+            setState(() {
+              _shake = false;
+            });
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (!state.hasSelectedCountry) ...[
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _shake = true;
+                    });
+                  },
+                  child: DropdownButtonFormField<String>(
+                    decoration: InputDecoration(
+                      labelText: 'State',
+                      border: const OutlineInputBorder(),
+                      errorText: _shake
+                          ? 'Please select a country first'
+                          : null,
+                    ),
+                    items: const [],
+                    onChanged: null,
+                  ),
                 ),
-                items: const [],
-                onChanged: null,
-              ),
-            ] else ...[
-              _buildEnabledStateDropdown(context, state),
+              ] else ...[
+                _buildEnabledStateDropdown(context, state),
+              ],
             ],
-          ],
+          ),
         );
       },
     );
