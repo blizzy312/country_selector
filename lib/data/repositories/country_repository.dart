@@ -3,5 +3,6 @@ import 'package:country_selector/models/state.dart';
 
 abstract class ICountryRepository {
   Future<List<Country>> getCountries();
-  Future<List<State>> getStatesByCountryId(int countryId);
+
+  Future<List<State>> getStatesByCountryId(String countryId);
 }

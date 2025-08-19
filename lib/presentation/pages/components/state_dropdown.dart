@@ -69,7 +69,7 @@ class StateDropdown extends StatelessWidget {
       );
     }
 
-    return DropdownButtonFormField<int>(
+    return DropdownButtonFormField<String>(
       decoration: const InputDecoration(
         labelText: 'State',
         border: OutlineInputBorder(),
@@ -77,7 +77,7 @@ class StateDropdown extends StatelessWidget {
       value: state.selectedState?.id,
       items: state.states
           .map(
-            (stateItem) => DropdownMenuItem<int>(
+            (stateItem) => DropdownMenuItem<String>(
               value: stateItem.id,
               child: Text(stateItem.value),
             ),
