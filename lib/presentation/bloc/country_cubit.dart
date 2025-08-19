@@ -54,15 +54,7 @@ class CountryCubit extends Cubit<CountrySelectorState> {
   }
 
   void reset() {
-    emit(
-      state.copyWith(
-        states: [],
-        clearSelectedCountry: true,
-        clearSelectedState: true,
-        clearCountriesError: true,
-        clearStatesError: true,
-      ),
-    );
+    emit(CountrySelectorState());
     loadCountries();
   }
 
