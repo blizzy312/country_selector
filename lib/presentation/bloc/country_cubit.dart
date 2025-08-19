@@ -14,7 +14,8 @@ class CountryCubit extends Cubit<CountrySelectorState> {
     emit(state.copyWith(isLoadingCountries: true, clearCountriesError: true));
 
     try {
-      final countries = await repository.getCountries();
+      final countries = (await repository.getCountries())
+        ..sort((a, b) => a.value.compareTo(b.value));
       emit(state.copyWith(countries: countries, isLoadingCountries: false));
     } catch (e) {
       emit(
@@ -40,7 +41,8 @@ class CountryCubit extends Cubit<CountrySelectorState> {
     emit(state.copyWith(isLoadingStates: true, clearStatesError: true));
 
     try {
-      final states = await repository.getStatesByCountryId(countryId);
+      final states = (await repository.getStatesByCountryId(countryId))
+        ..sort((a, b) => a.value.compareTo(b.value));
       emit(state.copyWith(states: states, isLoadingStates: false));
     } catch (e) {
       emit(state.copyWith(isLoadingStates: false, statesError: e.toString()));
