@@ -32,13 +32,7 @@ class CountrySelectorView extends StatelessWidget {
           padding: EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CountryDropdown(),
-              SizedBox(height: 24),
-              StateDropdown(),
-              SizedBox(height: 24),
-              OptionButtons(),
-            ],
+            children: [CountryDropdown(), StateDropdown(), OptionButtons()],
           ),
         ),
       ),
