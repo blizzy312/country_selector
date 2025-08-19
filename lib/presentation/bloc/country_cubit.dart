@@ -5,7 +5,7 @@ import 'package:country_selector/models/state.dart';
 import 'package:country_selector/presentation/bloc/country_state.dart';
 
 class CountryCubit extends Cubit<CountrySelectorState> {
-  final CountryRepository repository;
+  final ICountryRepository repository;
 
   CountryCubit({required this.repository}) : super(const CountrySelectorState());
 
