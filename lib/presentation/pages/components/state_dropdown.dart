@@ -1,3 +1,4 @@
+import 'package:country_selector/models/state.dart' as country_state;
 import 'package:country_selector/presentation/bloc/country_cubit.dart';
 import 'package:country_selector/presentation/bloc/country_state.dart';
 import 'package:country_selector/presentation/pages/components/loading_dropdown.dart';
@@ -96,27 +97,25 @@ class _StateDropdownState extends State<StateDropdown> {
       );
     }
 
-    return DropdownButtonFormField<String>(
+    return DropdownButtonFormField<country_state.State>(
       decoration: const InputDecoration(
         labelText: 'State',
         border: OutlineInputBorder(),
+        helperText: ' ',
       ),
-      value: state.selectedState?.id,
+      value: state.selectedState,
       items: state.states
           .map(
-            (stateItem) => DropdownMenuItem<String>(
-              value: stateItem.id,
+            (stateItem) => DropdownMenuItem<country_state.State>(
+              value: stateItem,
               child: Text(stateItem.value),
             ),
           )
           .toList(),
       onChanged: state.canSelectStates
-          ? (stateId) {
-              if (stateId != null) {
-                final selectedState = state.states.firstWhere(
-                  (s) => s.id == stateId,
-                );
-                context.read<CountryCubit>().selectState(selectedState);
+          ? (state) {
+              if (state != null) {
+                context.read<CountryCubit>().selectState(state);
               }
             }
           : null,

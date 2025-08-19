@@ -1,3 +1,4 @@
+import 'package:country_selector/models/country.dart';
 import 'package:country_selector/presentation/bloc/country_cubit.dart';
 import 'package:country_selector/presentation/bloc/country_state.dart';
 import 'package:country_selector/presentation/pages/components/loading_dropdown.dart';
@@ -29,6 +30,7 @@ class CountryDropdown extends StatelessWidget {
                     labelText: 'Country',
                     border: const OutlineInputBorder(),
                     errorText: state.countriesError,
+                    helperText: ' ',
                   ),
                   items: const [],
                   onChanged: null,
@@ -43,25 +45,23 @@ class CountryDropdown extends StatelessWidget {
           );
         }
 
-        return DropdownButtonFormField<String>(
+        return DropdownButtonFormField<Country>(
           decoration: const InputDecoration(
             labelText: 'Country',
             border: OutlineInputBorder(),
+            helperText: ' ',
           ),
-          value: state.selectedCountry?.id,
+          value: state.selectedCountry,
           items: state.countries
               .map(
-                (country) => DropdownMenuItem<String>(
-                  value: country.id,
+                (country) => DropdownMenuItem<Country>(
+                  value: country,
                   child: Text(country.value),
                 ),
               )
               .toList(),
-          onChanged: (countryId) {
-            if (countryId != null) {
-              final country = state.countries.firstWhere(
-                (c) => c.id == countryId,
-              );
+          onChanged: (country) {
+            if (country != null) {
               context.read<CountryCubit>().selectCountry(country);
             }
           },
