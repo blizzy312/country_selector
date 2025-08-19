@@ -1,5 +1,6 @@
 import 'package:country_selector/presentation/bloc/country_cubit.dart';
 import 'package:country_selector/presentation/bloc/country_state.dart';
+import 'package:country_selector/presentation/pages/components/selection_result_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,7 +38,15 @@ class OptionButtons extends StatelessWidget {
                   ),
                 ),
                 onPressed: state.hasSelectedCountry && state.hasSelectedState
-                    ? () {}
+                    ? () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => SelectionResultDialog(
+                            selectedCountry: state.selectedCountry!,
+                            selectedState: state.selectedState!,
+                          ),
+                        );
+                      }
                     : null,
                 child: Text('Complete'),
               );
