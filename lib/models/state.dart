@@ -1,19 +1,15 @@
-import 'package:json_annotation/json_annotation.dart';
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'state.g.dart';
 
 @JsonSerializable()
 class State extends Equatable {
-  final int id;
+  final String id;
   final String value;
-  final int countryId;
+  final String countryId;
 
-  const State({
-    required this.id,
-    required this.value,
-    required this.countryId,
-  });
+  const State({required this.id, required this.value, required this.countryId});
 
   factory State.fromJson(Map<String, dynamic> json) => _$StateFromJson(json);
 

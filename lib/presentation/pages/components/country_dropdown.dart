@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:country_selector/presentation/bloc/country_cubit.dart';
 import 'package:country_selector/presentation/bloc/country_state.dart';
 import 'package:country_selector/presentation/pages/components/loading_dropdown.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CountryDropdown extends StatelessWidget {
   const CountryDropdown({super.key});
@@ -43,21 +43,25 @@ class CountryDropdown extends StatelessWidget {
           );
         }
 
-        return DropdownButtonFormField<int>(
+        return DropdownButtonFormField<String>(
           decoration: const InputDecoration(
             labelText: 'Country',
             border: OutlineInputBorder(),
           ),
           value: state.selectedCountry?.id,
           items: state.countries
-              .map((country) => DropdownMenuItem<int>(
-                    value: country.id,
-                    child: Text(country.value),
-                  ))
+              .map(
+                (country) => DropdownMenuItem<String>(
+                  value: country.id,
+                  child: Text(country.value),
+                ),
+              )
               .toList(),
           onChanged: (countryId) {
             if (countryId != null) {
-              final country = state.countries.firstWhere((c) => c.id == countryId);
+              final country = state.countries.firstWhere(
+                (c) => c.id == countryId,
+              );
               context.read<CountryCubit>().selectCountry(country);
             }
           },

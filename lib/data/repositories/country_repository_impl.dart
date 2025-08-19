@@ -14,7 +14,7 @@ class CountryRepositoryImpl implements ICountryRepository {
   }
 
   @override
-  Future<List<State>> getStatesByCountryId(int countryId) {
+  Future<List<State>> getStatesByCountryId(String countryId) {
     return dataSource.getStatesByCountryId(countryId);
   }
 }
