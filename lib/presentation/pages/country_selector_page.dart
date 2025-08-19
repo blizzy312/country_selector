@@ -1,6 +1,7 @@
 import 'package:country_selector/data/repositories/country_repository.dart';
 import 'package:country_selector/presentation/bloc/country_cubit.dart';
 import 'package:country_selector/presentation/pages/components/country_dropdown.dart';
+import 'package:country_selector/presentation/pages/components/option_buttons.dart';
 import 'package:country_selector/presentation/pages/components/state_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,11 +32,7 @@ class CountrySelectorView extends StatelessWidget {
           padding: EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CountryDropdown(),
-              SizedBox(height: 24),
-              StateDropdown(),
-            ],
+            children: [CountryDropdown(), StateDropdown(), OptionButtons()],
           ),
         ),
       ),
