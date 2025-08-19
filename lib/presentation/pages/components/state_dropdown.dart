@@ -49,6 +49,7 @@ class _StateDropdownState extends State<StateDropdown> {
                       errorText: _shake
                           ? 'Please select a country first'
                           : null,
+                      helperText: _shake ? null : ' ',
                     ),
                     items: const [],
                     onChanged: null,
